@@ -2,11 +2,11 @@ import graphene
 from graphene import relay
 from graphene_sqlalchemy import SQLAlchemyObjectType, SQLAlchemyConnectionField
 from .models import Person, Pet, Location, Belonging
-from ..db import (db, 
-                  Person as PersonModel,
+from ..db import (Person as PersonModel,
                   Pet as PetModel,
                   Location as LocationModel,
                   Belonging as BelongingModel)
+from ..db import db_session as db
 
 
 
@@ -26,7 +26,7 @@ class CreatePerson(graphene.Mutation):
     person = graphene.Field(Person)
 
     def mutate(self, info, name):
-        person = PersonModel(name=name, age=age)
+        person = PersonModel(name=name)
         db.session.add(person)
         db.session.commit()
         return CreatePerson(person=person)

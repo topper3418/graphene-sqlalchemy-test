@@ -3,7 +3,7 @@ from sqlalchemy.orm import mapped_column, relationship
 
 
 def rel_bp(back_populates):
-    return mapped_column(relationship(back_populates=back_populates))
+    return relationship(back_populates=back_populates)
 
 
 def fk(ref_str: str):
